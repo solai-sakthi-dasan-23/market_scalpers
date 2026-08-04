@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFAQ();
   initTestimonials();
   initCountdown();
+  initCountUp();
+  initGlassGlow();
   const y = document.getElementById('year');
   if(y) y.textContent = new Date().getFullYear();
 });
@@ -127,6 +129,198 @@ function initCountdown(){
   }
   tick();
   setInterval(tick, 1000);
+}
+
+// ============ Animated count-up with digit scramble ============
+function initCountUp(){
+  const statNums = document.querySelectorAll('.stat-num[data-count-to]');
+  if(!statNums.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateNumber(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  statNums.forEach(el => {
+    // Store original display text so we can show it if animation is disabled
+    el._originalText = el.textContent;
+    io.observe(el);
+  });
+
+  function animateNumber(el){
+    if(reduceMotion){
+      el.classList.add('counted');
+      return;
+    }
+
+    const target = parseFloat(el.dataset.countTo);
+    const prefix = el.dataset.countPrefix || '';
+    const suffix = el.dataset.countSuffix || '';
+    const type = el.dataset.countType || 'number'; // number, percent, ratio, year
+    const decimals = parseInt(el.dataset.countDecimals || '0');
+
+    // Duration varies by type for non-uniform feel
+    let duration;
+    let easeFn;
+    switch(type){
+      case 'year':
+        duration = 1800;
+        easeFn = easeLinear;
+        break;
+      case 'percent':
+        duration = 1400;
+        easeFn = easeOutExpo;
+        break;
+      case 'ratio':
+        duration = 600;
+        easeFn = easeOutBack;
+        break;
+      case 'large':
+        duration = 2000;
+        easeFn = easeOutBounce;
+        break;
+      default:
+        duration = 1200;
+        easeFn = easeOutCubic;
+    }
+
+    el.classList.add('counting');
+
+    // Scramble phase: show random digits briefly before counting
+    const scrambleDuration = Math.min(duration * 0.2, 300);
+    const scrambleChars = '0123456789';
+    let scrambleStart = performance.now();
+
+    function scramble(now){
+      const elapsed = now - scrambleStart;
+      if(elapsed < scrambleDuration){
+        const displayLen = el._originalText.replace(/[^0-9]/g, '').length || 3;
+        let scrambled = '';
+        for(let i = 0; i < displayLen; i++){
+          scrambled += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        }
+        el.textContent = prefix + scrambled + suffix;
+        requestAnimationFrame(scramble);
+      } else {
+        // Start actual count-up
+        startCount(el, target, prefix, suffix, type, decimals, duration - scrambleDuration, easeFn);
+      }
+    }
+
+    requestAnimationFrame(scramble);
+  }
+
+  function startCount(el, target, prefix, suffix, type, decimals, duration, easeFn){
+    const start = performance.now();
+    // For ratios like "3:1", target is just the first number
+    const isRatio = type === 'ratio';
+    const ratioSuffix = el.dataset.countRatio || '';
+
+    function tick(now){
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeFn(progress);
+      const current = eased * target;
+
+      let display;
+      if(isRatio){
+        display = prefix + Math.round(current) + ratioSuffix + suffix;
+      } else if(type === 'year'){
+        display = prefix + Math.round(current) + suffix;
+      } else if(decimals > 0){
+        display = prefix + current.toFixed(decimals) + suffix;
+      } else {
+        display = prefix + formatNumber(Math.round(current)) + suffix;
+      }
+
+      el.textContent = display;
+
+      if(progress < 1){
+        requestAnimationFrame(tick);
+      } else {
+        // Final value — ensure exact
+        if(isRatio){
+          el.textContent = prefix + target + ratioSuffix + suffix;
+        } else if(type === 'year'){
+          el.textContent = prefix + target + suffix;
+        } else if(decimals > 0){
+          el.textContent = prefix + target.toFixed(decimals) + suffix;
+        } else {
+          el.textContent = prefix + formatNumber(target) + suffix;
+        }
+
+        el.classList.remove('counting');
+        el.classList.add('counted');
+
+        // Remove glow effect after 2 seconds
+        setTimeout(() => {
+          el.style.textShadow = '';
+        }, 2000);
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function formatNumber(n){
+    return n.toLocaleString('en-IN');
+  }
+
+  // Easing functions for varied animation feel
+  function easeLinear(t){ return t; }
+
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+  function easeOutExpo(t){ return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+
+  function easeOutBack(t){
+    const c1 = 1.70158;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  }
+
+  function easeOutBounce(t){
+    const n1 = 7.5625;
+    const d1 = 2.75;
+    if(t < 1 / d1){ return n1 * t * t; }
+    else if(t < 2 / d1){ return n1 * (t -= 1.5 / d1) * t + 0.75; }
+    else if(t < 2.5 / d1){ return n1 * (t -= 2.25 / d1) * t + 0.9375; }
+    else { return n1 * (t -= 2.625 / d1) * t + 0.984375; }
+  }
+}
+
+// ============ Glass card mouse-follow inner glow ============
+function initGlassGlow(){
+  document.querySelectorAll('.glass').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--glow-x', x + 'px');
+      card.style.setProperty('--glow-y', y + 'px');
+    });
+  });
+
+  // Re-init for dynamically loaded content (partials)
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('.glass:not([data-glow-init])').forEach(card => {
+      card.setAttribute('data-glow-init', '1');
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--glow-x', x + 'px');
+        card.style.setProperty('--glow-y', y + 'px');
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 // ============ Contact form (client-side demo handling) ============
