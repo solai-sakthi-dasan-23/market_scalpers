@@ -1,253 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Market Scalpers — Learn Forex, Crypto &amp; Gold Trading | Chennai's #1 Trading Institute</title>
-<meta name="description" content="Chennai's leading Forex, Crypto and Gold (XAUUSD) trading academy. Learn the proprietary TBEM strategy — 70% win rate across 600+ backtested trades. Structured courses for working professionals.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Scalpers — Learn Forex, Crypto &amp; Gold Trading | Chennai's #1 Trading Institute</title>
+  <meta name="description"
+    content="Chennai's leading Forex, Crypto and Gold (XAUUSD) trading academy. Learn the proprietary TBEM strategy — 70% win rate across 600+ backtested trades. Structured courses for working professionals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body data-page="home">
+  <canvas id="candlesBg"></canvas>
 
-<div id="nav-mount"></div>
+  <div id="nav-mount"></div>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="container hero-grid">
-    <div class="reveal in">
-      <div class="eyebrow">Chennai · Est. 2019</div>
-      <h1>Stop guessing.<br>Start trading with <span class="accent">a system.</span></h1>
-      <p class="lead">Market Scalpers is Chennai's leading Forex, Crypto and Gold trading academy — home of the proprietary <strong>TBEM</strong> (Time-Based Entry Module) strategy, built for working professionals who trade with structure, not emotion.</p>
-      <div class="hero-cta">
-        <a href="courses.html" class="btn btn-primary">Explore Courses</a>
-        <a href="results.html" class="btn btn-ghost">See Our TBEM Results</a>
-      </div>
-      <div class="hero-stats">
-        <div><div class="stat-num">1,600+</div><div class="stat-label">Traders Trained</div></div>
-        <div><div class="stat-num">70%</div><div class="stat-label">TBEM Win Rate</div></div>
-        <div><div class="stat-num">3+ yrs</div><div class="stat-label">Forward-Tested</div></div>
-      </div>
-    </div>
-
-    <!-- Signature element: annotated Order Block / FVG / Liquidity chart card -->
-    <div class="chart-card glass reveal in" style="transition-delay:.1s">
-      <div class="chart-head">
-        <span class="pair">XAUUSD · 15M</span>
-        <span class="live-dot">LIVE STRUCTURE</span>
-      </div>
-      <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
-        <!-- FVG zone -->
-        <rect x="60" y="70" width="90" height="34" fill="var(--teal-500)" opacity="0.18" rx="3"/>
-        <text x="65" y="66" fill="var(--teal-400)" font-size="10" font-family="JetBrains Mono, monospace">FVG</text>
-        <!-- Order block zone -->
-        <rect x="230" y="150" width="90" height="30" fill="var(--gold-500)" opacity="0.20" rx="3"/>
-        <text x="235" y="146" fill="var(--gold-400)" font-size="10" font-family="JetBrains Mono, monospace">ORDER BLOCK</text>
-        <!-- liquidity line -->
-        <line x1="20" y1="196" x2="460" y2="196" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
-        <text x="380" y="190" fill="var(--ink-2)" font-size="9" font-family="JetBrains Mono, monospace">LIQUIDITY</text>
-        <!-- candles -->
-        <g stroke-width="2">
-          <g><line x1="35" y1="150" x2="35" y2="200" stroke="#E5484D"/><rect x="30" y="160" width="10" height="28" fill="#E5484D"/></g>
-          <g><line x1="60" y1="120" x2="60" y2="175" stroke="#2FBF71"/><rect x="55" y="130" width="10" height="30" fill="#2FBF71"/></g>
-          <g><line x1="85" y1="100" x2="85" y2="150" stroke="#2FBF71"/><rect x="80" y="108" width="10" height="28" fill="#2FBF71"/></g>
-          <g><line x1="110" y1="90" x2="110" y2="140" stroke="#E5484D"/><rect x="105" y="98" width="10" height="26" fill="#E5484D"/></g>
-          <g><line x1="135" y1="95" x2="135" y2="145" stroke="#2FBF71"/><rect x="130" y="102" width="10" height="28" fill="#2FBF71"/></g>
-          <g><line x1="160" y1="110" x2="160" y2="160" stroke="#E5484D"/><rect x="155" y="118" width="10" height="26" fill="#E5484D"/></g>
-          <g><line x1="185" y1="125" x2="185" y2="178" stroke="#E5484D"/><rect x="180" y="132" width="10" height="30" fill="#E5484D"/></g>
-          <g><line x1="210" y1="140" x2="210" y2="196" stroke="#E5484D"/><rect x="205" y="150" width="10" height="30" fill="#E5484D"/></g>
-          <g><line x1="235" y1="150" x2="235" y2="205" stroke="#2FBF71"/><rect x="230" y="160" width="10" height="30" fill="#2FBF71"/></g>
-          <g><line x1="260" y1="120" x2="260" y2="175" stroke="#2FBF71"/><rect x="255" y="128" width="10" height="30" fill="#2FBF71"/></g>
-          <g><line x1="285" y1="95" x2="285" y2="150" stroke="#2FBF71"/><rect x="280" y="102" width="10" height="30" fill="#2FBF71"/></g>
-          <g><line x1="310" y1="70" x2="310" y2="125" stroke="#2FBF71"/><rect x="305" y="78" width="10" height="30" fill="#2FBF71"/></g>
-          <g><line x1="335" y1="55" x2="335" y2="105" stroke="#E5484D"/><rect x="330" y="62" width="10" height="26" fill="#E5484D"/></g>
-          <g><line x1="360" y1="65" x2="360" y2="115" stroke="#2FBF71"/><rect x="355" y="72" width="10" height="28" fill="#2FBF71"/></g>
-          <g><line x1="385" y1="50" x2="385" y2="100" stroke="#2FBF71"/><rect x="380" y="56" width="10" height="28" fill="#2FBF71"/></g>
-          <g><line x1="410" y1="40" x2="410" y2="90" stroke="#2FBF71"/><rect x="405" y="46" width="10" height="28" fill="#2FBF71"/></g>
-          <g><line x1="435" y1="55" x2="435" y2="105" stroke="#E5484D"/><rect x="430" y="62" width="10" height="26" fill="#E5484D"/></g>
-        </g>
-      </svg>
-      <div class="chart-legend">
-        <span><i class="dot" style="background:var(--teal-500);"></i> Fair Value Gap</span>
-        <span><i class="dot" style="background:var(--gold-500);"></i> Order Block</span>
-        <span><i class="dot" style="background:var(--ink-2);"></i> Liquidity Pool</span>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ============ TICKER ============ -->
-<div class="ticker-bar">
-  <div class="ticker-track" id="tickerTrack">
-    <div class="ticker-item"><span class="sym">Loading market data…</span></div>
-  </div>
-</div>
-<p class="ticker-note" id="tickerNote">Prices refresh every 60 seconds · for educational reference only, not execution-grade data.</p>
-
-<!-- ============ WHY US ============ -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Why Chennai Traders Choose Us</div>
-      <h2>Structure beats guesswork.</h2>
-      <p>Since 2019, we've trained more than 1,600 students through small classroom batches of up to 20 learners — combining market structure, risk management, and trading psychology into one repeatable process.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="feature-card glass reveal">
-        <div class="icon">📊</div>
-        <h3>TBEM Strategy System</h3>
-        <p>Time-based entries built on Order Blocks, FVGs, liquidity and market structure — works across Forex pairs, XAUUSD/XAGUSD, Bitcoin and altcoins.</p>
-      </div>
-      <div class="feature-card glass reveal" style="transition-delay:.08s">
-        <div class="icon">🛡️</div>
-        <h3>Risk &amp; Portfolio Guidance</h3>
-        <p>Position sizing, risk-per-trade discipline and crypto/forex portfolio strategy so you grow capital systematically, not emotionally.</p>
-      </div>
-      <div class="feature-card glass reveal" style="transition-delay:.16s">
-        <div class="icon">♾️</div>
-        <h3>Lifetime Community Access</h3>
-        <p>Every student keeps lifetime access to mentorship, live market discussions, and a trading community that holds you accountable.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STATS ============ -->
-<section class="stats-strip glass-strong" style="margin:0 24px; border-radius:32px; max-width:1240px; margin-inline:auto;">
-  <div class="container">
-    <div class="grid grid-4">
-      <div class="reveal"><div class="stat-num gold">600+</div><div class="stat-label">Total Trades Logged</div></div>
-      <div class="reveal" style="transition-delay:.05s"><div class="stat-num teal">3:1</div><div class="stat-label">Profit Factor</div></div>
-      <div class="reveal" style="transition-delay:.1s"><div class="stat-num gold">70%</div><div class="stat-label">Win Rate</div></div>
-      <div class="reveal" style="transition-delay:.15s"><div class="stat-num teal">1:3</div><div class="stat-label">Risk / Reward</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COURSES PREVIEW ============ -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Programs</div>
-      <h2>Choose your program.</h2>
-      <p>Structured Forex, Crypto and Gold trading programs — designed for beginners, working professionals, and serious full-time traders.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="course-card glass reveal">
-        <span class="tag gold-tag">Forex</span>
-        <h3>Forex Fundamental + Technicals</h3>
-        <p class="desc">Market structure, price action, and the TBEM strategy applied to major and minor currency pairs.</p>
-        <div class="course-meta">
-          <div class="row">🕘 9:00 PM – 9:30 PM IST</div>
-          <div class="row">📅 2 Months · Mon–Fri</div>
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="reveal in">
+        <div class="eyebrow">Chennai · Est. 2019</div>
+        <h1>Stop guessing.<br>Start trading with <span class="accent">a system.</span></h1>
+        <p class="lead">Market Scalpers is Chennai's leading Forex, Crypto and Gold trading academy — home of the
+          proprietary <strong>TBEM</strong> (Time-Based Entry Module) strategy, built for working professionals who
+          trade with structure, not emotion.</p>
+        <div class="hero-cta">
+          <a href="courses.html" class="btn btn-primary">Explore Courses</a>
+          <a href="results.html" class="btn btn-ghost">See Our TBEM Results</a>
         </div>
-        <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
-      </div>
-      <div class="course-card glass reveal" style="transition-delay:.08s">
-        <span class="tag teal-tag">Crypto</span>
-        <h3>Crypto Fundamental + Technicals</h3>
-        <p class="desc">Build a solid trading foundation for Bitcoin and altcoins through proven strategy and practical market insight.</p>
-        <div class="course-meta">
-          <div class="row">📅 10 Weeks · Flexible Schedule</div>
-          <div class="row">🗓️ Mon–Fri</div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">1,600+</div>
+            <div class="stat-label">Traders Trained</div>
+          </div>
+          <div>
+            <div class="stat-num">70%</div>
+            <div class="stat-label">TBEM Win Rate</div>
+          </div>
+          <div>
+            <div class="stat-num">3+ yrs</div>
+            <div class="stat-label">Forward-Tested</div>
+          </div>
         </div>
-        <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
       </div>
-      <div class="course-card glass reveal" style="transition-delay:.16s">
-        <span class="tag gold-tag">Gold &amp; Silver</span>
-        <h3>XAUUSD / XAGUSD Precision Trading</h3>
-        <p class="desc">Order blocks, FVGs and liquidity concepts applied specifically to Gold and Silver session behavior and news volatility.</p>
-        <div class="course-meta">
-          <div class="row">📅 6 Weeks · Evening Batch</div>
-          <div class="row">🗓️ Mon–Fri</div>
-        </div>
-        <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============ ENROLLMENT COUNTDOWN ============ -->
-<section>
-  <div class="container">
-    <div class="countdown-card glass reveal">
-      <div>
-        <div class="eyebrow" style="margin-bottom:8px;">Next Batch Closing Soon</div>
-        <h3 style="font-size:22px;">Forex Fundamental + Technicals — enrolls 17th August</h3>
-      </div>
-      <div class="countdown-units" id="countdown" data-target="2026-08-17T21:00:00">
-        <div class="unit"><div class="n" data-u="d">00</div><div class="l">Days</div></div>
-        <div class="unit"><div class="n" data-u="h">00</div><div class="l">Hrs</div></div>
-        <div class="unit"><div class="n" data-u="m">00</div><div class="l">Min</div></div>
-        <div class="unit"><div class="n" data-u="s">00</div><div class="l">Sec</div></div>
-      </div>
-      <a href="contact.html" class="btn btn-primary">Reserve Your Seat</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Student Results</div>
-      <h2>1,600+ traders. Real feedback.</h2>
-    </div>
-    <div class="testi-wrap">
-      <div class="testi-track">
-        <div class="testi-card glass">
-          <p class="quote">"I joined with zero market knowledge. Six months into TBEM and I finally trade with a checklist instead of a gut feeling — my drawdowns are half what they used to be."</p>
-          <div class="testi-who"><div class="avatar">R</div><div><div class="name">Rahul S.</div><div class="role">Software Engineer, Chennai</div></div></div>
+      <!-- Signature element: annotated Order Block / FVG / Liquidity chart card -->
+      <div class="chart-card glass reveal in" style="transition-delay:.1s">
+        <div class="chart-head">
+          <span class="pair">XAUUSD · 15M</span>
+          <span class="live-dot">LIVE STRUCTURE</span>
         </div>
-        <div class="testi-card glass">
-          <p class="quote">"The Order Block and FVG concepts finally made liquidity make sense to me. My XAUUSD entries are far more precise now, and I stopped revenge trading completely."</p>
-          <div class="testi-who"><div class="avatar">P</div><div><div class="name">Priya M.</div><div class="role">Working Professional</div></div></div>
-        </div>
-        <div class="testi-card glass">
-          <p class="quote">"Small batch size meant Nykash actually reviewed my trades personally. That mentorship, more than the strategy itself, is what changed my consistency."</p>
-          <div class="testi-who"><div class="avatar">A</div><div><div class="name">Arun K.</div><div class="role">Crypto Trader</div></div></div>
-        </div>
-        <div class="testi-card glass">
-          <p class="quote">"I was overleveraging on every trade out of greed. The risk management module alone was worth the entire course fee."</p>
-          <div class="testi-who"><div class="avatar">S</div><div><div class="name">Sanjay V.</div><div class="role">Full-time Trader</div></div></div>
+        <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- FVG zone -->
+          <rect x="60" y="70" width="90" height="34" fill="var(--green-500)" opacity="0.18" rx="3" />
+          <text x="65" y="66" fill="var(--green-400)" font-size="10" font-family="JetBrains Mono, monospace">FVG</text>
+          <!-- Order block zone -->
+          <rect x="230" y="150" width="90" height="30" fill="var(--red-500)" opacity="0.20" rx="3" />
+          <text x="235" y="146" fill="var(--red-400)" font-size="10" font-family="JetBrains Mono, monospace">ORDER
+            BLOCK</text>
+          <!-- liquidity line -->
+          <line x1="20" y1="196" x2="460" y2="196" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="4 4"
+            opacity="0.5" />
+          <text x="380" y="190" fill="var(--ink-2)" font-size="9"
+            font-family="JetBrains Mono, monospace">LIQUIDITY</text>
+          <!-- candles -->
+          <g stroke-width="2">
+            <g>
+              <line x1="35" y1="150" x2="35" y2="200" stroke="#E5484D" />
+              <rect x="30" y="160" width="10" height="28" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="60" y1="120" x2="60" y2="175" stroke="#2FBF71" />
+              <rect x="55" y="130" width="10" height="30" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="85" y1="100" x2="85" y2="150" stroke="#2FBF71" />
+              <rect x="80" y="108" width="10" height="28" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="110" y1="90" x2="110" y2="140" stroke="#E5484D" />
+              <rect x="105" y="98" width="10" height="26" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="135" y1="95" x2="135" y2="145" stroke="#2FBF71" />
+              <rect x="130" y="102" width="10" height="28" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="160" y1="110" x2="160" y2="160" stroke="#E5484D" />
+              <rect x="155" y="118" width="10" height="26" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="185" y1="125" x2="185" y2="178" stroke="#E5484D" />
+              <rect x="180" y="132" width="10" height="30" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="210" y1="140" x2="210" y2="196" stroke="#E5484D" />
+              <rect x="205" y="150" width="10" height="30" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="235" y1="150" x2="235" y2="205" stroke="#2FBF71" />
+              <rect x="230" y="160" width="10" height="30" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="260" y1="120" x2="260" y2="175" stroke="#2FBF71" />
+              <rect x="255" y="128" width="10" height="30" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="285" y1="95" x2="285" y2="150" stroke="#2FBF71" />
+              <rect x="280" y="102" width="10" height="30" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="310" y1="70" x2="310" y2="125" stroke="#2FBF71" />
+              <rect x="305" y="78" width="10" height="30" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="335" y1="55" x2="335" y2="105" stroke="#E5484D" />
+              <rect x="330" y="62" width="10" height="26" fill="#E5484D" />
+            </g>
+            <g>
+              <line x1="360" y1="65" x2="360" y2="115" stroke="#2FBF71" />
+              <rect x="355" y="72" width="10" height="28" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="385" y1="50" x2="385" y2="100" stroke="#2FBF71" />
+              <rect x="380" y="56" width="10" height="28" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="410" y1="40" x2="410" y2="90" stroke="#2FBF71" />
+              <rect x="405" y="46" width="10" height="28" fill="#2FBF71" />
+            </g>
+            <g>
+              <line x1="435" y1="55" x2="435" y2="105" stroke="#E5484D" />
+              <rect x="430" y="62" width="10" height="26" fill="#E5484D" />
+            </g>
+          </g>
+        </svg>
+        <div class="chart-legend">
+          <span><i class="dot" style="background:var(--green-500);"></i> Fair Value Gap</span>
+          <span><i class="dot" style="background:var(--red-500);"></i> Order Block</span>
+          <span><i class="dot" style="background:var(--ink-2);"></i> Liquidity Pool</span>
         </div>
       </div>
     </div>
-    <div class="testi-nav"></div>
-  </div>
-</section>
+  </header>
 
-<!-- ============ FAQ ============ -->
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">FAQ</div>
-      <h2>Common questions.</h2>
-    </div>
-    <div class="faq-list glass reveal" style="padding:8px 28px;">
-      <div class="faq-item">
-        <button class="faq-q">Is Forex trading legal in India? <span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. Indian residents can legally trade currency pairs involving the Indian Rupee — such as USD/INR, EUR/INR, and GBP/INR — on regulated exchanges like NSE and BSE under SEBI and RBI guidelines. We teach both legal Indian forex instruments and international strategy concepts with guidance on regulatory compliance.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Do I need prior trading experience? <span class="plus">+</span></button>
-        <div class="faq-a"><p>No. Both the Forex and Crypto programs start from the basics — market fundamentals, chart reading, platform setup, price action, and the TBEM strategy — in a structured step-by-step sequence.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Why do most traders fail? <span class="plus">+</span></button>
-        <div class="faq-a"><p>Mostly FOMO-driven impulsive entries, revenge trading after a loss, and overleveraging from greed. Our psychology module and rules-based TBEM strategy are built specifically to remove emotional decision-making from execution.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Is there support after the course ends? <span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes — lifetime access to our community, market discussions, and mentorship to help you keep practicing and improving.</p></div>
-      </div>
+  <!-- ============ TICKER ============ -->
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <div class="ticker-item"><span class="sym">Loading market data…</span></div>
     </div>
   </div>
-</section>
+  <p class="ticker-note" id="tickerNote">Prices refresh every 60 seconds · for educational reference only, not
+    execution-grade data.</p>
 
-<div id="footer-mount"></div>
+  <!-- ============ WHY US ============ -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Why Chennai Traders Choose Us</div>
+        <h2>Structure beats guesswork.</h2>
+        <p>Since 2019, we've trained more than 1,600 students through small classroom batches of up to 20 learners —
+          combining market structure, risk management, and trading psychology into one repeatable process.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="feature-card glass reveal">
+          <div class="icon">📊</div>
+          <h3>TBEM Strategy System</h3>
+          <p>Time-based entries built on Order Blocks, FVGs, liquidity and market structure — works across Forex pairs,
+            XAUUSD/XAGUSD, Bitcoin and altcoins.</p>
+        </div>
+        <div class="feature-card glass reveal" style="transition-delay:.08s">
+          <div class="icon">🛡️</div>
+          <h3>Risk &amp; Portfolio Guidance</h3>
+          <p>Position sizing, risk-per-trade discipline and crypto/forex portfolio strategy so you grow capital
+            systematically, not emotionally.</p>
+        </div>
+        <div class="feature-card glass reveal" style="transition-delay:.16s">
+          <div class="icon">♾️</div>
+          <h3>Lifetime Community Access</h3>
+          <p>Every student keeps lifetime access to mentorship, live market discussions, and a trading community that
+            holds you accountable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="js/main.js"></script>
-<script src="js/ticker.js"></script>
+  <!-- ============ STATS ============ -->
+  <section class="stats-strip glass-strong"
+    style="margin:0 24px; border-radius:32px; max-width:1240px; margin-inline:auto;">
+    <div class="container">
+      <div class="grid grid-4">
+        <div class="reveal">
+          <div class="stat-num red">600+</div>
+          <div class="stat-label">Total Trades Logged</div>
+        </div>
+        <div class="reveal" style="transition-delay:.05s">
+          <div class="stat-num green">3:1</div>
+          <div class="stat-label">Profit Factor</div>
+        </div>
+        <div class="reveal" style="transition-delay:.1s">
+          <div class="stat-num red">70%</div>
+          <div class="stat-label">Win Rate</div>
+        </div>
+        <div class="reveal" style="transition-delay:.15s">
+          <div class="stat-num green">1:3</div>
+          <div class="stat-label">Risk / Reward</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COURSES PREVIEW ============ -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Programs</div>
+        <h2>Choose your program.</h2>
+        <p>Structured Forex, Crypto and Gold trading programs — designed for beginners, working professionals, and
+          serious full-time traders.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="course-card glass reveal">
+          <span class="tag red-tag">Forex</span>
+          <h3>Forex Fundamental + Technicals</h3>
+          <p class="desc">Market structure, price action, and the TBEM strategy applied to major and minor currency
+            pairs.</p>
+          <div class="course-meta">
+            <div class="row">🕘 9:00 PM – 9:30 PM IST</div>
+            <div class="row">📅 2 Months · Mon–Fri</div>
+          </div>
+          <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
+        </div>
+        <div class="course-card glass reveal" style="transition-delay:.08s">
+          <span class="tag green-tag">Crypto</span>
+          <h3>Crypto Fundamental + Technicals</h3>
+          <p class="desc">Build a solid trading foundation for Bitcoin and altcoins through proven strategy and
+            practical market insight.</p>
+          <div class="course-meta">
+            <div class="row">📅 10 Weeks · Flexible Schedule</div>
+            <div class="row">🗓️ Mon–Fri</div>
+          </div>
+          <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
+        </div>
+        <div class="course-card glass reveal" style="transition-delay:.16s">
+          <span class="tag red-tag">Gold &amp; Silver</span>
+          <h3>XAUUSD / XAGUSD Precision Trading</h3>
+          <p class="desc">Order blocks, FVGs and liquidity concepts applied specifically to Gold and Silver session
+            behavior and news volatility.</p>
+          <div class="course-meta">
+            <div class="row">📅 6 Weeks · Evening Batch</div>
+            <div class="row">🗓️ Mon–Fri</div>
+          </div>
+          <a href="courses.html" class="btn btn-ghost btn-sm">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENROLLMENT COUNTDOWN ============ -->
+  <section>
+    <div class="container">
+      <div class="countdown-card glass reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px;">Next Batch Closing Soon</div>
+          <h3 style="font-size:22px;">Forex Fundamental + Technicals — enrolls 17th August</h3>
+        </div>
+        <div class="countdown-units" id="countdown" data-target="2026-08-17T21:00:00">
+          <div class="unit">
+            <div class="n" data-u="d">00</div>
+            <div class="l">Days</div>
+          </div>
+          <div class="unit">
+            <div class="n" data-u="h">00</div>
+            <div class="l">Hrs</div>
+          </div>
+          <div class="unit">
+            <div class="n" data-u="m">00</div>
+            <div class="l">Min</div>
+          </div>
+          <div class="unit">
+            <div class="n" data-u="s">00</div>
+            <div class="l">Sec</div>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Reserve Your Seat</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Student Results</div>
+        <h2>1,600+ traders. Real feedback.</h2>
+      </div>
+      <div class="testi-wrap">
+        <div class="testi-track">
+          <div class="testi-card glass">
+            <p class="quote">"I joined with zero market knowledge. Six months into TBEM and I finally trade with a
+              checklist instead of a gut feeling — my drawdowns are half what they used to be."</p>
+            <div class="testi-who">
+              <div class="avatar">R</div>
+              <div>
+                <div class="name">Rahul S.</div>
+                <div class="role">Software Engineer, Chennai</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card glass">
+            <p class="quote">"The Order Block and FVG concepts finally made liquidity make sense to me. My XAUUSD
+              entries are far more precise now, and I stopped revenge trading completely."</p>
+            <div class="testi-who">
+              <div class="avatar">P</div>
+              <div>
+                <div class="name">Priya M.</div>
+                <div class="role">Working Professional</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card glass">
+            <p class="quote">"Small batch size meant Nykash actually reviewed my trades personally. That mentorship,
+              more than the strategy itself, is what changed my consistency."</p>
+            <div class="testi-who">
+              <div class="avatar">A</div>
+              <div>
+                <div class="name">Arun K.</div>
+                <div class="role">Crypto Trader</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card glass">
+            <p class="quote">"I was overleveraging on every trade out of greed. The risk management module alone was
+              worth the entire course fee."</p>
+            <div class="testi-who">
+              <div class="avatar">S</div>
+              <div>
+                <div class="name">Sanjay V.</div>
+                <div class="role">Full-time Trader</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-nav"></div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">FAQ</div>
+        <h2>Common questions.</h2>
+      </div>
+      <div class="faq-list glass reveal" style="padding:8px 28px;">
+        <div class="faq-item">
+          <button class="faq-q">Is Forex trading legal in India? <span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Yes. Indian residents can legally trade currency pairs involving the Indian Rupee — such as USD/INR,
+              EUR/INR, and GBP/INR — on regulated exchanges like NSE and BSE under SEBI and RBI guidelines. We teach
+              both legal Indian forex instruments and international strategy concepts with guidance on regulatory
+              compliance.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do I need prior trading experience? <span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>No. Both the Forex and Crypto programs start from the basics — market fundamentals, chart reading,
+              platform setup, price action, and the TBEM strategy — in a structured step-by-step sequence.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Why do most traders fail? <span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Mostly FOMO-driven impulsive entries, revenge trading after a loss, and overleveraging from greed. Our
+              psychology module and rules-based TBEM strategy are built specifically to remove emotional decision-making
+              from execution.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is there support after the course ends? <span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Yes — lifetime access to our community, market discussions, and mentorship to help you keep practicing
+              and improving.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/ticker.js"></script>
+  <script src="js/candles-bg.js"></script>
 </body>
+
 </html>
