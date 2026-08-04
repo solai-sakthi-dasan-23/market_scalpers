@@ -502,6 +502,7 @@ section {
   display: flex;
   gap: 0;
   width: max-content;
+  min-width: 100%;
   animation: ticker-scroll 34s linear infinite;
 }
 
@@ -923,12 +924,14 @@ section {
 .testi-wrap {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .testi-track {
   display: flex;
   gap: 24px;
   transition: transform .5s var(--ease);
+  width: 100%;
 }
 
 .testi-card {
@@ -1373,6 +1376,22 @@ section {
   /* Course cards and feature card padding reduction */
   .feature-card, .course-card { padding: 18px; }
 
+  /* Countdown and testimonials must stack instead of overflowing */
+  .countdown-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+  }
+  .countdown-units {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .countdown-units .unit { min-width: 0; flex: 1; }
+  .testi-wrap { overflow: hidden; }
+  .testi-card { min-width: 100%; padding: 22px; }
+
   /* Hide heavy canvas on small devices for performance */
   #candlesBg { display: none; }
 }
@@ -1383,6 +1402,8 @@ section {
   .hero h1 { font-size: clamp(30px, 6.4vw, 48px); }
   .nav-inner { padding: 0 18px; }
   .chart-card svg { height: 220px; }
+  .countdown-card { flex-direction: column; align-items: flex-start; }
+  .countdown-units { gap: 10px; }
 }
 
 :focus-visible {
