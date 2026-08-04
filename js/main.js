@@ -26,27 +26,136 @@ document.addEventListener('DOMContentLoaded', async () => {
   if(y) y.textContent = new Date().getFullYear();
 });
 
-// ============ Nav: active link, scroll style, mobile toggle ============
+// ============ Nav: split-tier, sliding indicator, bottom sheet ============
 function initNav(){
   const nav = document.getElementById('siteNav');
   const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
+  const sheet = document.getElementById('navSheet');
+  const backdrop = document.getElementById('navBackdrop');
+  const indicator = document.getElementById('navIndicator');
+  const navLinks = document.getElementById('navLinks');
   if(!nav) return;
 
+  // --- Scroll merge: compact top bar, hide floating pill ---
+  let lastScroll = 0;
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 30);
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    lastScroll = window.scrollY;
   });
 
-  if(toggle && links){
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  // --- Sliding indicator for desktop link pill ---
+  function moveIndicator(targetEl){
+    if(!indicator || !targetEl || !navLinks) return;
+    const pillRect = navLinks.getBoundingClientRect();
+    const linkRect = targetEl.getBoundingClientRect();
+    const left = linkRect.left - pillRect.left;
+    const width = linkRect.width;
+    indicator.style.left = left + 'px';
+    indicator.style.width = width + 'px';
+    indicator.classList.add('visible');
   }
 
+  function hideIndicator(){
+    if(!indicator) return;
+    // Only hide if no active link
+    const active = navLinks?.querySelector('a.active');
+    if(active){
+      moveIndicator(active.parentElement || active);
+    } else {
+      indicator.classList.remove('visible');
+    }
+  }
+
+  // Set indicator on active link initially
   const page = document.body.getAttribute('data-page');
   if(page){
-    const active = nav.querySelector(`[data-nav="${page}"]`);
-    if(active) active.classList.add('active');
+    const activeDesktop = nav.querySelector(`.nav-links [data-nav="${page}"]`);
+    if(activeDesktop){
+      activeDesktop.classList.add('active');
+      // Wait for layout to settle
+      requestAnimationFrame(() => requestAnimationFrame(() => moveIndicator(activeDesktop)));
+    }
+
+    // Mark active in sheet links too
+    const activeSheet = nav.querySelector(`.sheet-links [data-nav="${page}"]`);
+    if(activeSheet) activeSheet.classList.add('active');
   }
+
+  // Hover-follow indicator on desktop
+  if(navLinks){
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => moveIndicator(link));
+    });
+    navLinks.addEventListener('mouseleave', hideIndicator);
+  }
+
+  // Recalculate indicator on resize
+  window.addEventListener('resize', () => {
+    const active = navLinks?.querySelector('a.active');
+    if(active) moveIndicator(active);
+  });
+
+  // --- Mobile bottom sheet toggle ---
+  let sheetOpen = false;
+
+  function openSheet(){
+    sheetOpen = true;
+    sheet?.classList.add('open');
+    backdrop?.classList.add('visible');
+    toggle?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet(){
+    sheetOpen = false;
+    sheet?.classList.remove('open');
+    backdrop?.classList.remove('visible');
+    toggle?.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      if(sheetOpen) closeSheet();
+      else openSheet();
+    });
+  }
+
+  // Close on backdrop click
+  backdrop?.addEventListener('click', closeSheet);
+
+  // Close on link click in sheet
+  sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSheet));
+
+  // --- Swipe down to close ---
+  let touchStartY = 0;
+  let touchCurrentY = 0;
+  let isSwiping = false;
+
+  sheet?.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    isSwiping = true;
+  }, { passive: true });
+
+  sheet?.addEventListener('touchmove', (e) => {
+    if(!isSwiping) return;
+    touchCurrentY = e.touches[0].clientY;
+    const diff = touchCurrentY - touchStartY;
+    if(diff > 0){
+      sheet.style.transform = `translateY(${diff}px)`;
+    }
+  }, { passive: true });
+
+  sheet?.addEventListener('touchend', () => {
+    if(!isSwiping) return;
+    isSwiping = false;
+    const diff = touchCurrentY - touchStartY;
+    if(diff > 80){
+      closeSheet();
+    }
+    // Reset transform (CSS transition handles the snap back)
+    sheet.style.transform = '';
+  });
 }
 
 // ============ Scroll reveal ============

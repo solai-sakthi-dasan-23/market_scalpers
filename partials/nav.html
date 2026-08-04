@@ -1,21 +1,50 @@
 <nav class="site-nav" id="siteNav">
-  <div class="nav-inner">
-    <div class="nav-glass">
+  <!-- Top tier: Brand + CTAs -->
+  <div class="nav-top">
+    <div class="nav-top-inner">
       <a href="index.html" class="brand"><span class="mark">MS</span> Market Scalpers</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" data-nav="home">Home</a></li>
-        <li><a href="about.html" data-nav="about">About</a></li>
-        <li><a href="courses.html" data-nav="courses">Courses</a></li>
-        <li><a href="psychology.html" data-nav="psychology">Psychology</a></li>
-        <li><a href="results.html" data-nav="results">TBEM Results</a></li>
-        <li><a href="blog.html" data-nav="blog">Blog</a></li>
-        <li><a href="contact.html" data-nav="contact">Contact</a></li>
-      </ul>
       <div class="nav-cta">
         <a href="contact.html" class="btn btn-ghost btn-sm">Talk to us</a>
         <a href="courses.html" class="btn btn-primary btn-sm">Enroll Now</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
+    </div>
+    <div class="nav-accent-line"></div>
+  </div>
+
+  <!-- Bottom tier: Floating link pill -->
+  <div class="nav-menu-wrap">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-nav="home">Home</a></li>
+      <li><a href="about.html" data-nav="about">About</a></li>
+      <li><a href="courses.html" data-nav="courses">Courses</a></li>
+      <li><a href="psychology.html" data-nav="psychology">Psychology</a></li>
+      <li><a href="results.html" data-nav="results">TBEM Results</a></li>
+      <li><a href="blog.html" data-nav="blog">Blog</a></li>
+      <li><a href="contact.html" data-nav="contact">Contact</a></li>
+      <span class="nav-indicator" id="navIndicator"></span>
+    </ul>
+  </div>
+
+  <!-- Mobile bottom-sheet overlay -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-sheet" id="navSheet">
+    <div class="sheet-handle"></div>
+    <ul class="sheet-links" id="sheetLinks">
+      <li><a href="index.html" data-nav="home"><span class="sheet-icon">🏠</span> Home</a></li>
+      <li><a href="about.html" data-nav="about"><span class="sheet-icon">👤</span> About</a></li>
+      <li><a href="courses.html" data-nav="courses"><span class="sheet-icon">📚</span> Courses</a></li>
+      <li><a href="psychology.html" data-nav="psychology"><span class="sheet-icon">🧠</span> Psychology</a></li>
+      <li><a href="results.html" data-nav="results"><span class="sheet-icon">📊</span> TBEM Results</a></li>
+      <li><a href="blog.html" data-nav="blog"><span class="sheet-icon">✍️</span> Blog</a></li>
+      <li><a href="contact.html" data-nav="contact"><span class="sheet-icon">💬</span> Contact</a></li>
+    </ul>
+    <div class="sheet-cta">
+      <a href="courses.html" class="btn btn-primary">Enroll Now</a>
     </div>
   </div>
 </nav>
